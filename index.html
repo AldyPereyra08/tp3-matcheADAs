@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+      crossorigin="anonymous"/>
+      <link rel="shortcut icon" type="image/ico" href="./iconoMatch.ico">
+    <link rel="stylesheet" href="style.css" />
+    <title>MatcheADAs</title>
+  </head>
+
+  <body>
+    <div class="main-container">
+        <h1 class="title">MatcheADAs</h1>
+        <div class="info">
+            <div class="scoring">
+                <p class="combo">Combo x<span id="value-combo">0</span></p>
+                <p class="puntos">Puntos: <span id="value-score">0</span></p>
+            </div>
+            <div>
+                <button class="button-info" id="button-help">
+                    <i class="fas fa-info-circle"></i>
+                </button>
+                <button class="button-info" id="button-reset-game">
+                    <i class="fas fa-undo-alt"></i>
+                </button>
+            </div>
+        </div>
+        <div class="container-grid">
+            <div class="grid">
+                <!-- ACA VA LA GRILLA -->
+            </div>
+        </div>
+        <div class="time">
+            <i class="fas fa-hourglass-half"></i>
+            <p class="timer" id="timer">0:00</p>
+        </div>
+    </div>
+    <div class="overlay"></div>
+        <div class="modal" id="modal-welcome">
+            <h2 class="modal-title">¡Bienvenida!</h2>
+            <div class="modal-contents">
+                <p class="modal-text"> 
+                En MatcheADAs tu objetivo es juntar tres o más ítems del mismo tipo, ya sea en fila o columna. Para eso, selecciona un ítem y a continuación un ítem adyacente para intercambiarlos de lugar.
+                </p>
+                <p class="modal-text">
+                Si se forma un grupo, esos ítems se eliminarán y ganarás puntos. ¡Sigue armando grupos de 3 o más antes de que se acabe el time!
+                </p>
+                <h4>Controles</h4>
+                <p>Click izquierdo: selección</p>
+                <p>Enter o Espacio: selección</p>
+                <p>Flechas o WASD: movimiento e intercambio</p>
+            </div>
+            <div class="modal-buttons">
+                <button class="button" id="button-play">A jugar</button>
+            </div>
+        </div>
+
+        <div class="modal hide" id="modal-info">
+            <h2 class="modal-title">¡Bienvenida!</h2>
+            <div class="modal-contents">
+                <p class="modal-text"> 
+                En MatcheADAs tu objetivo es juntar tres o más ítems del mismo tipo, ya sea en fila o columna. Para eso, selecciona un ítem y a continuación un ítem adyacente para intercambiarlos de lugar.
+                </p>
+                <p class="modal-text">
+                Si se forma un grupo, esos ítems se eliminarán y ganarás puntos. ¡Sigue armando grupos de 3 o más antes de que se acabe el time!
+                </p>
+                <h4>Controles</h4>
+                <p>Click izquierdo: selección</p>
+                <p>Enter o Espacio: selección</p>
+                <p>Flechas o WASD: movimiento e intercambio</p>
+            </div>
+            <div class="modal-buttons">
+                <button class="button" id="button-play-info">A jugar</button>
+            </div>
+        </div>
+
+        <div class="modal hide" id="modal-new-play">
+            <h2 class="modal-title">Nuevo Juego</h2>
+            <div class="modal-contents">
+                <p> 
+                Selecciona una dificultad
+                </p>
+            </div>
+            <div class="modal-buttons">
+                <button class="button" id="button-easy">Fácil</button>
+                <button class="button" id="button-normal">Normal</button>
+                <button class="button" id="button-difficult">Difícil</button>
+            </div>
+        </div>
+
+        <div class="modal hide" id="modal-end-game">
+            <h2 class="modal-title">¡Juego terminado!</h2>
+            <div class="modal-contents">
+                <p>
+                    scoring final:<span id="scoring-final">0</span>
+                </p>
+            </div>
+            <div class="modal-buttons">
+                <button class="button" id="button-new-game">Nuevo Juego</button>
+                <button class="button" id="button-continue-finishgame">Reiniciar</button>
+            </div>
+        </div>
+
+        <div class="modal hide" id="modal-reset-game">
+            <h2 class="modal-title">¿Reiniciar juego?</h2>
+            <div class="modal-contents">
+                <p>Perderás todo tu scoring acumulado!</p>
+            </div>
+            <div class="modal-buttons">
+                <button class="button" id="button-cancel">Cancelar</button>
+                <button class="button" id="button-new-game-rebooted">Nuevo Juego</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
