@@ -38,27 +38,28 @@ const resetCombo = () => {
 
 /// TIMER ///////////////////////////////////////////////
 
-let initialSeconds = 30;
+let initialSeconds = 300;
 let timer = null;
 
 const timerStart = () => {
+  console.log("timer start");
   let totalSeconds = initialSeconds;
 
   minutes = Math.floor(totalSeconds / 60);
   minutes = (minutes < 10 ? "0" : "") + minutes;
 
-  totalSeconds %= 60;
-  totalSeconds = (totalSeconds < 10 ? "0" : "") + totalSeconds;
+  let remainSeconds = totalSeconds % 60;
+  remainSeconds = (remainSeconds < 10 ? "0" : "") + remainSeconds;
 
   let timerSeconds = document.getElementById("timer");
-  timerSeconds.innerHTML = minutes + ":" + totalSeconds;
+  timerSeconds.innerHTML = minutes + ":" + remainSeconds;
   initialSeconds--;
 
   if (initialSeconds > -1) {
     timer = setTimeout(timerStart, 1000);
   }
 
-  if (totalSeconds == 00) {
+  if (totalSeconds == 0) {
     showOverlay();
     showModalEndGame();
   }
@@ -66,7 +67,18 @@ const timerStart = () => {
 
 const clearTimer = () => {
   clearTimeout(timer);
-  initialSeconds = 30;
+  timer = null;
+  initialSeconds = 300;
+};
+
+const pauseTimer = () => {
+  clearTimeout(timer);
+};
+
+const resumeTime = () => {
+  if (timer) {
+    timer = setTimeout(timerStart, 1000);
+  }
 };
 
 //MODALES ///////////////////////////////////////////////
@@ -107,10 +119,12 @@ const hideModalInfoGame = () => {
 
 const hideOverlay = () => {
   overlay.classList.add("hide");
+  resumeTime();
 };
 
 const showOverlay = () => {
   overlay.classList.remove("hide");
+  pauseTimer();
 };
 
 const hidemodalNewPlay = () => {
@@ -179,7 +193,7 @@ buttonEasy.onclick = () => {
   } while (checkForHorizontalMatches() || checkForVerticalMatches());
   addGridToHtml(difficulty);
   resetScore();
-  //updateValueScore()
+  updateValueScore();
   timerStart();
 };
 
@@ -193,9 +207,8 @@ buttonNormal.onclick = () => {
     generateGrids(difficulty);
   } while (checkForHorizontalMatches() || checkForVerticalMatches());
   addGridToHtml(difficulty);
-  updateClock();
   resetScore();
-  //updateValueScore()
+  updateValueScore();
   timerStart();
 };
 
@@ -209,9 +222,8 @@ buttonDifficult.onclick = () => {
     generateGrids(difficulty);
   } while (checkForHorizontalMatches() || checkForVerticalMatches());
   addGridToHtml(difficulty);
-  updateClock();
   resetScore();
-  //updateValueScore()
+  updateValueScore();
   timerStart();
 };
 
@@ -391,14 +403,29 @@ const findMatchVertical = () => {
 };
 
 const generateNewAnimals = (arrayMatches) => {
+  console.log(arrayMatches);
   for (let i = 0; i < arrayMatches.length; i++) {
     let x = arrayMatches[i][0];
     let y = arrayMatches[i][1];
-    addNewAnimalToJs(grid, x, y);
-    let match = obteinSquare(x, y);
-    match.classList.add("delete-animal");
 
-    addToHtml(match, x, y);
+    const toDelete = obteinSquare(x, y);
+    toDelete.parentElement.removeChild(toDelete);
+
+    for (let j = x; j > 0; j--) {
+      // Update HTML
+      const animalAbove = obteinSquare(j - 1, y);
+      animalAbove.dataset.x = animalAbove.dataset.x * 1 + 1;
+      console.log(animalAbove.dataset.x * size);
+      animalAbove.style.top = `${animalAbove.dataset.x * size}px`;
+
+      // UPDATE JS
+      grid[j][y] = grid[j - 1][y];
+    }
+
+    addNewAnimalToJs(grid, 0, y);
+    gridHtml.appendChild(generateSquare(0, y, grid, difficulty));
+    let newAnimal = obteinSquare(0, y);
+    addToHtml(newAnimal, 0, y);
   }
 };
 
@@ -414,15 +441,9 @@ const obteinSquare = (x, y) => {
 };
 
 const addToHtml = (match, x, y) => {
-  setTimeout(() => {
-    match.innerHTML = `<div style="font-size: ${size - 15}px;"> ${
-      grid[x][y]
-    } </div>`;
-    match.classList.remove("delete-animal");
-    if (thereAreMatch()) {
-      findMatches();
-    }
-  }, 700);
+  match.innerHTML = `<div style="font-size: ${size - 15}px;"> ${
+    grid[x][y]
+  } </div>`;
 };
 
 /// SELECCIONAR ITEMS //////////////////////////////////////////////////////////
