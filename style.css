@@ -220,7 +220,6 @@ body {
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  transition: 0.5s;
   overflow: hidden;
 }
 

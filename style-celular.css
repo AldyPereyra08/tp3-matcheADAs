@@ -97,32 +97,7 @@
     background-color: #295a27;
     margin-left: 5px;
   }
-
-  /*.button-cancel {
-    background-color: #eeeeee;
-    color: #000;
-  }
-
-  #modal-new-game {
-    z-index: 4;
-  }
-
-  #modal-end-game {
-    z-index: 4;
-  }
-*/
-  /* ///////////////////////////////////////////////////////////////////////// */
-
   .hide {
     display: none;
-  }
-  .grid {
-    width: 100%;
-    height: 100%;
-    overflow-wrap: normal;
-  }
-
-  .grid > div {
-    padding-bottom: 200px;
   }
 }

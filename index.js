@@ -33,12 +33,12 @@ const resetScore = () => {
 };
 
 const resetCombo = () => {
-  valueCombo.textContent = 0;
+  valueCombo.textContent = 1;
 };
 
 /// TIMER ///////////////////////////////////////////////
 
-let initialSeconds = 300;
+let initialSeconds = 30;
 let timer = null;
 
 const timerStart = () => {
@@ -68,7 +68,7 @@ const timerStart = () => {
 const clearTimer = () => {
   clearTimeout(timer);
   timer = null;
-  initialSeconds = 300;
+  initialSeconds = 30;
 };
 
 const pauseTimer = () => {
